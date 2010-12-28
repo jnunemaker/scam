@@ -20,6 +20,17 @@ describe Scam do
     end
   end
 
+  describe ".all" do
+    before do
+      FeedTemplate.create(:id => 2)
+      FeedTemplate.create(:id => 1)
+    end
+
+    it "returns all instances sorted by id" do
+      FeedTemplate.all.map(&:id).should == [1, 2]
+    end
+  end
+
   describe ".initialize" do
     before do
       @template = FeedTemplate.new(:id => 5)

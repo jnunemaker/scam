@@ -8,6 +8,10 @@ module Scam
   end
 
   module ClassMethods
+    def all
+      instances.sort_by { |i| i.id }
+    end
+
     def create(attrs={})
       new(attrs).tap { |i| instances << i }
     end
