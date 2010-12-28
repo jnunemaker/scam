@@ -39,4 +39,10 @@ module Scam
   def initialize(attrs={})
     attrs.each { |key, value| send("#{key}=", value) }
   end
+
+  def eql?(other)
+    other.class == self.class && other.id == id
+  end
+
+  alias == eql?
 end

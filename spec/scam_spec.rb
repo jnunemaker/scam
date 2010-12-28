@@ -124,4 +124,32 @@ describe Scam do
       FeedTemplate.should include(@template)
     end
   end
+
+  describe "#eql?" do
+    it "returns true if same class and id" do
+      FeedTemplate.new(:id => 1).should eql(FeedTemplate.new(:id => 1))
+    end
+
+    it "returns false if different class" do
+      FeedTemplate.new(:id => 1).should_not eql(Class.new.new)
+    end
+
+    it "returns false if different id" do
+      FeedTemplate.new(:id => 1).should_not eql(FeedTemplate.new(:id => 2))
+    end
+  end
+
+  describe "#==" do
+    it "returns true if same class and id" do
+      FeedTemplate.new(:id => 1).should == FeedTemplate.new(:id => 1)
+    end
+
+    it "returns false if different class" do
+      FeedTemplate.new(:id => 1).should_not == Class.new.new
+    end
+
+    it "returns false if different id" do
+      FeedTemplate.new(:id => 1).should_not == FeedTemplate.new(:id => 2)
+    end
+  end
 end
