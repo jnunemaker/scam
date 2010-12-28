@@ -52,6 +52,28 @@ describe Scam do
     end
   end
 
+  describe ".[]" do
+    before do
+      @template = FeedTemplate.create(:id => 1)
+    end
+
+    context "with integer id" do
+      it "returns instance if found" do
+        FeedTemplate[1].should == @template
+      end
+    end
+
+    context "with string id" do
+      it "returns instance if found" do
+        FeedTemplate['1'].should == @template
+      end
+    end
+
+    it "returns nil if not found" do
+      FeedTemplate[1111122].should be_nil
+    end
+  end
+
   describe ".create" do
     before do
       @template = FeedTemplate.create(:id => 1)

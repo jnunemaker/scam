@@ -20,6 +20,8 @@ module Scam
       detect { |i| i.id == id.to_i }
     end
 
+    alias [] find
+
     def instances
       @instances ||= []
     end
