@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    scam (0.0.1)
+    scam (0.1.0)
 
 GEM
   remote: http://rubygems.org/
