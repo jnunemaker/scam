@@ -1,0 +1,56 @@
+= Scam
+
+Really basic model-ish thing for creating different types in your application easily.
+
+I use this whenever I want something to do psuedo belongs to/has many relationships, but do not want to back a model with a database as the data does not change often, if ever.
+
+== Usage
+
+Just create a class and include scam.
+
+    class FeedTemplate
+      include Scam
+
+      attr_accessor :title, :icon, :instructions, :template, :format, :label
+
+      def expand(value)
+        url = template.gsub('{value}', URI.escape(value))
+        url = "http://#{url}" if url !~ /https?\:\/\//
+        url
+      end
+
+      def parse(body)
+        case format
+          when 'json'
+            ActiveSupport::JSON.decode(body)
+          when 'feed'
+            Feedzirra::Feed.parse(body).to_hash
+        end
+      end
+    end
+
+    FeedTemplate.create({
+      :id           => 1,
+      :title        => 'Twitter',
+      :label        => 'Twitter Username',
+      :icon         => 'twitter',
+      :instructions => 'Enter your Twitter username',
+      :format       => 'json',
+      :template     => 'http://twitter.com/statuses/user_timeline/{value}.json',
+    })
+
+Attributes are just defined using attr_accessor. :id is added when you include Scam.
+
+== Note on Patches/Pull Requests
+
+* Fork the project.
+* Make your feature addition or bug fix.
+* Add tests for it. This is important so I don't break it in a
+  future version unintentionally.
+* Commit, do not mess with rakefile, version, or history.
+  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+* Send me a pull request. Bonus points for topic branches.
+
+== Copyright
+
+Copyright (c) 2010 John Nunemaker. See LICENSE for details.
