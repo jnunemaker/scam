@@ -20,14 +20,40 @@ describe Scam do
     end
   end
 
-  describe ".all" do
-    before do
-      FeedTemplate.create(:id => 2)
-      FeedTemplate.create(:id => 1)
+  describe ".sorted_by" do
+    it "defaults to id" do
+      FeedTemplate.sorted_by.should == :id
     end
 
-    it "returns all instances sorted by id" do
-      FeedTemplate.all.map(&:id).should == [1, 2]
+    it "gets/sets sorted_by" do
+      FeedTemplate.sorted_by(:position)
+      FeedTemplate.sorted_by.should == :position
+    end
+  end
+
+  describe ".all" do
+    context "default sort by" do
+      before do
+        FeedTemplate.create(:id => 2)
+        FeedTemplate.create(:id => 1)
+      end
+
+      it "returns all instances sorted by id" do
+        FeedTemplate.all.map(&:id).should == [1, 2]
+      end
+    end
+
+    context "custom sort by" do
+      before do
+        FeedTemplate.sorted_by(:position)
+        FeedTemplate.send(:attr_accessor, :position)
+        FeedTemplate.create(:id => 2, :position => 1)
+        FeedTemplate.create(:id => 1, :position => 2)
+      end
+
+      it "returns all instances sorted by custom attribute" do
+        FeedTemplate.all.map(&:id).should == [2, 1]
+      end
     end
   end
 

@@ -2,14 +2,18 @@ module Scam
   def self.included(base)
     base.extend(ClassMethods)
     base.class.send(:include, Enumerable)
-    base.class_eval do
-      attr_accessor(:id)
-    end
+    base.class_eval { attr_accessor(:id) }
   end
 
   module ClassMethods
     def all
-      instances.sort_by { |i| i.id }
+      instances.sort_by { |i| i.send(sorted_by) }
+    end
+
+    def sorted_by(attribute=nil)
+      @sorted_by = attribute unless attribute.nil?
+      @sorted_by = :id if @sorted_by.nil?
+      @sorted_by
     end
 
     def create(attrs={})
