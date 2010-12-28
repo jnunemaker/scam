@@ -6,13 +6,13 @@ Gem::Specification.new do |s|
   s.name        = "scam"
   s.version     = Scam::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
+  s.authors     = ["John Nunemaker"]
+  s.email       = ["nunemaker@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Really basic fake model for type-ish stuff}
+  s.description = %q{Really basic fake model for type-ish stuff}
 
-  s.rubyforge_project = "scam"
+  s.add_development_dependency 'rspec', '~> 2.3'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
