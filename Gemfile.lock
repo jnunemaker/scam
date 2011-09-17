@@ -1,12 +1,13 @@
 PATH
   remote: .
   specs:
-    scam (0.1.0)
+    scam (0.2.0)
 
 GEM
   remote: http://rubygems.org/
   specs:
     diff-lcs (1.1.2)
+    rake (0.9.2)
     rspec (2.3.0)
       rspec-core (~> 2.3.0)
       rspec-expectations (~> 2.3.0)
@@ -20,5 +21,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  rake
   rspec (~> 2.3)
   scam!
