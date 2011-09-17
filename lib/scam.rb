@@ -1,11 +1,7 @@
 module Scam
   def self.included(base)
-    base.class_eval do
-      class << self
-        include Enumerable
-      end
-      attr_accessor :id
-    end
+    base.extend(Enumerable)
+    base.send(:attr_accessor, :id)
     base.extend(ClassMethods)
   end
 
